@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parallax — Scroll-Driven (No GSAP)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <svg viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" aria-label="Parallax landscape">
+    <defs>
+
+      <radialGradient id="skyGrad" cx="50%" cy="22%" r="80%">
+        <stop id="skyA" offset="0%" stop-color="#203a93"/>
+        <stop id="skyB" offset="65%" stop-color="#0f1633"/>
+        <stop id="skyC" offset="100%" stop-color="#090e1f"/>
+      </radialGradient>
+
+
+      <radialGradient id="sunGrad" cx="40%" cy="25%" r="22%">
+        <stop id="sunCore" offset="0%" stop-color="#ffe59a"/>
+        <stop id="sunHalo" offset="90%" stop-color="#ff9e5f"/>
+      </radialGradient>
+
+
+      <radialGradient id="nightGrad" cx="50%" cy="45%" r="70%">
+        <stop offset="0%" stop-color="#0e1530"/>
+        <stop offset="100%" stop-color="#050812"/>
+      </radialGradient>
+
+      <symbol id="cloud">
+        <path d="M90,45c9,-19 31,-31 51,-20 7,-25 50,-33 71,-11 27,-3 47,19 42,41
+                 24,7 31,38 9,53H66c-34,-6 -36,-57 24,-63z" fill="#ffffff" opacity="0.7"/>
+      </symbol>
+    </defs>
+
+
+    <g id="scene1">
+      <rect x="0" y="0" width="1440" height="900" fill="url(#skyGrad)"/>
+      <circle id="sun" cx="380" cy="240" r="110" fill="url(#sunGrad)" opacity="0.92"/>
+
+
+      <g id="hills-back" fill="#22304f" opacity="0.55">
+        <path d="M0,520 L180,380 L300,520 L420,410 L560,540 L760,380 L940,520 L1100,410 L1300,540 L1440,480 L1440,900 L0,900Z"/>
+      </g>
+      <g id="hills-mid" fill="#1b2642" opacity="0.75">
+        <path d="M0,580 L120,480 L260,600 L380,520 L520,650 L700,500 L880,640 L1060,520 L1240,660 L1440,620 L1440,900 L0,900Z"/>
+      </g>
+      <g id="hills-front" fill="#121b33">
+        <path d="M0,640 L160,560 L300,680 L440,600 L620,730 L820,580 L1000,720 L1180,600 L1340,760 L1440,740 L1440,900 L0,900Z"/>
+      </g>
+
+     
+      <use id="cloud1" href="#cloud" x="120"  y="120" width="180" height="100"/>
+      <use id="cloud2" href="#cloud" x="780"  y="150" width="230" height="130" opacity="0.6"/>
+      <use id="cloud3" href="#cloud" x="1060" y="90"  width="210" height="120"  opacity="0.65"/>
+      <use id="cloud4" href="#cloud" x="420"  y="70"  width="190" height="110"  opacity="0.55"/>
+
+   
+      <text id="prompt" x="72" y="820"
+            font-family="Verdana, Geneva, Tahoma, sans-serif"
+            font-size="40" fill="#cbd7ff" letter-spacing="2">
+        Scroll to explore
+      </text>
+    </g>
+
+
+    <g id="scene3" opacity="0" pointer-events="none">
+      <rect x="0" y="0" width="1440" height="900" fill="url(#nightGrad)"/>
+      <g id="stars" opacity="0.0">
+        <circle cx="120" cy="140" r="1.6" fill="#aab9ff"/>
+        <circle cx="260" cy="80"  r="1.2" fill="#aab9ff"/>
+        <circle cx="380" cy="200" r="1.4" fill="#aab9ff"/>
+        <circle cx="640" cy="110" r="1.3" fill="#aab9ff"/>
+        <circle cx="800" cy="70"  r="1.5" fill="#aab9ff"/>
+        <circle cx="980" cy="160" r="1.2" fill="#aab9ff"/>
+        <circle cx="1140"cy="90"  r="1.4" fill="#aab9ff"/>
+        <circle cx="1300"cy="180" r="1.2" fill="#aab9ff"/>
+      </g>
+      <text id="endText" x="72" y="820"
+            font-family="Verdana, Geneva, Tahoma, sans-serif"
+            font-size="40" fill="#cbd7ff" letter-spacing="2" opacity="0.0">
+        Scroll back to dawn
+      </text>
+    </g>
+  </svg>
+
+  
+  <div class="scrollDriver" aria-hidden="true"></div>
+
+
+  <script src="app.js"></script>
+</body>
+</html>
