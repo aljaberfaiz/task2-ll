@@ -1,0 +1,82 @@
+
+*{ box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: #070a12; color: #e8ecff; }
+
+
+body::-webkit-scrollbar{ display:none; }
+body{ -ms-overflow-style: none; scrollbar-width: none; }
+
+
+svg { position: fixed; inset: 0; width: 100%; height: 100vh; display: block; z-index: 1; }
+
+
+.scrollDriver { position: relative; width: 1px; height: 6000px; }
+
+
+@supports (animation-timeline: scroll()) {
+
+  .scrollDriver { view-timeline-name: --page; view-timeline-axis: block; }
+
+
+  #hills-back, #hills-mid, #hills-front, #cloud1, #cloud2, #cloud3, #cloud4,
+  #sun, #prompt, #scene3, #stars, #endText {
+    animation-duration: 1s;          
+    animation-timing-function: linear;
+    animation-timeline: --page;
+    animation-fill-mode: both;
+  }
+
+
+  #hills-back { --dy: -18vh; animation-name: parallaxBack; }
+  #hills-mid  { --dy: -28vh; animation-name: parallaxMid; }
+  #hills-front{ --dy: -40vh; animation-name: parallaxFront; }
+
+  @keyframes parallaxBack  { from { transform: translateY(0) } to { transform: translateY(var(--dy)) } }
+  @keyframes parallaxMid   { from { transform: translateY(0) } to { transform: translateY(var(--dy)) } }
+  @keyframes parallaxFront { from { transform: translateY(0) } to { transform: translateY(var(--dy)) } }
+
+
+  #cloud1 { animation-name: cloud1; }
+  #cloud2 { animation-name: cloud2; }
+  #cloud3 { animation-name: cloud3; }
+  #cloud4 { animation-name: cloud4; }
+
+  @keyframes cloud1 { from { transform: translateX(0) }   to { transform: translateX(40vw) } }
+  @keyframes cloud2 { from { transform: translateX(0) }   to { transform: translateX(70vw) } }
+  @keyframes cloud3 { from { transform: translateX(0) }   to { transform: translateX(-60vw) } }
+  @keyframes cloud4 { from { transform: translate(0,0) }  to { transform: translate(-30vw, 4vh) } }
+
+
+  #sun { animation-name: sunArc; }
+  @keyframes sunArc {
+    from { transform: translate(0, 0) }
+    to   { transform: translate(380px, -30px) }
+  }
+ 
+  #skyA { animation: skyA 1s linear both; animation-timeline: --page; }
+  #skyB { animation: skyB 1s linear both; animation-timeline: --page; }
+  #sunCore, #sunHalo { animation: sunTint 1s linear both; animation-timeline: --page; }
+
+  @keyframes skyA   { from { stop-color:#203a93 } to { stop-color:#3149b4 } }
+  @keyframes skyB   { from { stop-color:#0f1633; offset:65% } to { stop-color:#121b33; offset:68% } }
+  @keyframes sunTint{ from { stop-color: #ffe59a } to { stop-color: #ffd36e } }
+
+
+  #prompt { animation-name: promptOut; }
+  @keyframes promptOut { from { opacity: 1 } to { opacity: 0 } }
+
+ 
+  #scene3 { animation-name: nightReveal; }
+  #stars  { animation-name: starFade; }
+  #endText{ animation-name: endText; }
+
+
+  @keyframes nightReveal { 0% { opacity: 0 } 70% { opacity: 0 } 100% { opacity: 1 } }
+  @keyframes starFade    { 0% { opacity: 0 } 80% { opacity: 0 } 100% { opacity: .6 } }
+  @keyframes endText     { 0% { opacity: 0 } 85% { opacity: 0 } 100% { opacity: .85 } }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  #hills-back, #hills-mid, #hills-front, #cloud1, #cloud2, #cloud3, #cloud4, #sun { transform: none !important; }
+}
